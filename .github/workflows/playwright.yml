@@ -1,4 +1,4 @@
-name: Playwright Screenshot
+name: Playwright Screenshot (Non-Headless)
 
 on:
   push:
@@ -24,16 +24,14 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install setuptools
-          pip install playwright playwright-stealth
+          pip install playwright playwright-stealth setuptools
           playwright install
 
-      - name: Run Playwright script
-        run: python3 .github/workflows/transavia_screenshot.py
+      - name: Run Playwright script non-headless with Xvfb
+        run: xvfb-run python3 .github/workflows/transavia_screenshot.py
 
       - name: Upload Screenshot Artifact
-        # Si une version v4 est disponible, vous pouvez changer ici en "actions/upload-artifact@v4"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: transavia-screenshot
           path: transavia_homepage.png
