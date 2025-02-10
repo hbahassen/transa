@@ -25,4 +25,4 @@ jobs:
           pip install undetected-chromedriver selenium
 
       - name: Run Selenium script
-        run: python path/to/selenium_script.py
+        run: python .github/workflows/selenium_script.py
