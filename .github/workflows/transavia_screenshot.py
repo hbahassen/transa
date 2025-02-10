@@ -4,12 +4,12 @@ from playwright_stealth import stealth_async
 
 async def main():
     async with async_playwright() as p:
-        # Lancement de Chromium en mode non-headless (affichage visible)
+        # Lance Chromium en mode non-headless
         browser = await p.chromium.launch(headless=False)
         context = await browser.new_context()
         page = await context.new_page()
 
-        # Appliquer le plugin stealth pour réduire les traces d'automatisation
+        # Appliquer le plugin stealth (vous pouvez le commenter temporairement pour tester)
         await stealth_async(page)
 
         # URL cible
@@ -17,8 +17,16 @@ async def main():
         print(f"Navigation vers {url} ...")
         await page.goto(url, wait_until="networkidle")
         
-        # Optionnel : attendre quelques secondes pour que la page soit bien chargée
-        await asyncio.sleep(5)
+        # Attendre explicitement que le calendrier soit présent (ajustez le sélecteur si nécessaire)
+        try:
+            await page.wait_for_selector('.c-calendar', timeout=15000)
+            print("Calendrier détecté.")
+        except Exception as e:
+            print("Calendrier non détecté:", e)
+        
+        # Faire défiler la page pour forcer le rendu du contenu
+        await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+        await asyncio.sleep(2)
         
         # Prendre une capture d'écran
         screenshot_path = "transavia_homepage.png"
