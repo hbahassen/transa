@@ -11,31 +11,30 @@ options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--window-size=1920,1080")
 options.add_argument("--remote-debugging-port=9222")
 
-# Indiquez le chemin du binaire de Google Chrome installé sur GitHub Actions
-# Sur ubuntu-latest, le binaire se trouve généralement ici :
+# Spécifier le chemin du binaire de Google Chrome (sur ubuntu-latest, il se trouve généralement ici)
 options.binary_location = "/usr/bin/google-chrome"
 
-# Démarrer le driver avec undetected_chromedriver
-driver = uc.Chrome(options=options)
+# Forcer l'utilisation d'une version compatible avec Chrome 132
+driver = uc.Chrome(version_main=132, options=options)
 
 try:
     # 1. Ouvrir la première URL
     url1 = "https://www.transavia.com/fr-FR/book-a-flight/flights/search/?r=True&ap=4&cp=0&ip=0&ds=ORY&as=IST&od=13&om=4&oy=2025&id=22&im=4&iy=2025&fb=false"
     print("Ouverture de la première URL...")
     driver.get(url1)
-    time.sleep(5)  # attendre 5 secondes pour être sûr du chargement
+    time.sleep(5)  # Attendre 5 secondes pour être sûr du chargement
 
     # 2. Ouvrir la deuxième URL
     url2 = "https://www.transavia.com/fr-FR/book-a-flight/flights/search/#month-view"
     print("Ouverture de la deuxième URL...")
     driver.get(url2)
-    time.sleep(5)  # attendre 5 secondes
+    time.sleep(5)  # Attendre 5 secondes
 
     # 3. Ouvrir la troisième URL
     url3 = "https://www.transavia.com/fr-FR/reservez-un-vol/vols/calendar/"
     print("Ouverture de la troisième URL...")
     driver.get(url3)
-    time.sleep(10)  # attendre 10 secondes pour s'assurer du chargement complet et laisser le temps aux éventuels challenges de se résoudre
+    time.sleep(10)  # Attendre 10 secondes pour s'assurer du chargement complet
 
     # 4. Extraction du contenu textuel de la troisième page
     print("Extraction du contenu textuel de la troisième page...")
