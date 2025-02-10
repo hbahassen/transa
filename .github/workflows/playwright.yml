@@ -2,9 +2,11 @@ name: Playwright Screenshot
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   screenshot:
@@ -28,3 +30,10 @@ jobs:
 
       - name: Run Playwright script
         run: python3 .github/workflows/transavia_screenshot.py
+
+      - name: Upload Screenshot Artifact
+        # Si une version v4 est disponible, vous pouvez changer ici en "actions/upload-artifact@v4"
+        uses: actions/upload-artifact@v3
+        with:
+          name: transavia-screenshot
+          path: transavia_homepage.png
