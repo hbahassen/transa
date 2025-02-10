@@ -25,4 +25,4 @@ jobs:
           pip install selenium webdriver-manager
 
       - name: Run Selenium script
-        run: python selenium_script.py
+        run: python .github/workflows/selenium_script.py
