@@ -1,4 +1,4 @@
-name: Selenium Test
+name: Selenium Test with undetected-chromedriver
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install selenium webdriver-manager
+          pip install undetected-chromedriver selenium
 
       - name: Run Selenium script
-        run: python .github/workflows/selenium_script.py
+        run: python path/to/selenium_script.py
