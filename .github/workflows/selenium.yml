@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"  # Utilisez une version antérieure qui inclut distutils
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
